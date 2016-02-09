@@ -1,4 +1,5 @@
 var project = new Project('stencil_triangles');
+project.addSources('../common/src');
 project.addSources('src');
 project.addAssets('assets/**');
 
