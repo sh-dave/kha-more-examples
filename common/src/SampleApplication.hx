@@ -33,8 +33,8 @@ class SampleApplication {
 //	var renderMode = Backbuffer;
 	var renderMode = Framebuffer;
 
-	public function new() {
-		bb = Image.createRenderTarget(512, 512, null, DepthStencilFormat.Depth32Stencil8);// DepthAutoStencilAuto);
+	public function new( bbWidth : Int, bbHeight : Int ) {
+		bb = Image.createRenderTarget(bbWidth, bbHeight, null, DepthStencilFormat.DepthAutoStencilAuto);
 		Assets.loadEverything(assets_loadedHandler);
 	}
 

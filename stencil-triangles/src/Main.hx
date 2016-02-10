@@ -180,11 +180,14 @@ class StencilTrianglesExample extends SampleApplication {
 }
 
 class Main {
+	static inline var width = 512;
+	static inline var height = 512;
+
 	public static function main() {
-		System.init('stencil_triangles', 512, 512, system_initializedHandler);
+		System.init('stencil_triangles', width, height, system_initializedHandler);
 	}
 
 	static function system_initializedHandler() {
-		new StencilTrianglesExample();
+		new StencilTrianglesExample(width, height);
 	}
 }
