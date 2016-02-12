@@ -14,13 +14,14 @@ import kha.math.FastMatrix4;
 import kha.math.FastVector3;
 import kha.Scaler;
 import kha.System;
+import kha.Window;
 
 enum RenderMode {
 	Backbuffer;
 	Framebuffer;
 }
 
-class SampleApplication {
+class SampleDisplayTarget {
 	var pipeline : PipelineState;
 	var mvpId : ConstantLocation;
 
@@ -30,30 +31,44 @@ class SampleApplication {
 	var projection = FastMatrix4.perspectiveProjection(45.0, 4.0 / 3.0, 0.1, 100.0);
 
 	var bb : Image;
-//	var renderMode = Backbuffer;
+	//var renderMode = Backbuffer;
 	var renderMode = Framebuffer;
 
-	public function new( bbWidth : Int, bbHeight : Int ) {
-		bb = Image.createRenderTarget(bbWidth, bbHeight, null, DepthStencilFormat.DepthAutoStencilAuto);
-		Assets.loadEverything(assets_loadedHandler);
+	var windowId : Int;
+
+	public function new( windowId : Int ) {
+		this.windowId = windowId;
+		//bb = Image.createRenderTarget(
+			//System.windowWidth(windowId),
+			//System.windowHeight(windowId),
+			//window.textureFormat, window.depthStencilFormat);
+
+		bb = Image.createRenderTarget(
+			1366,
+			768,
+			null,
+			DepthStencilFormat.DepthAutoStencilAuto
+		);
+
+		assets_loadedHandler();
 	}
 
 	function assets_loadedHandler() {
 		setup();
 
-		System.notifyOnRender(0, render);
+		System.notifyOnRender(windowId, render);
 
-		if (Keyboard.get() != null) {
-			Keyboard.get().notify(keyboard_downHandler, keyboard_upHandler);
-		}
-
-		if (Mouse.get() != null) {
-			Mouse.get().notify(mouse_downHandler, mouse_upHandler, mouse_moveHandler, mouse_wheelHandler);
-		}
-
-		if (Surface.get() != null) {
-			Surface.get().notify(touch_startHandler, touch_endHandler, touch_moveHandler);
-		}
+		//if (Keyboard.get() != null) {
+			//Keyboard.get().notify(keyboard_downHandler, keyboard_upHandler);
+		//}
+//
+		//if (Mouse.get() != null) {
+			//Mouse.get().notify(mouse_downHandler, mouse_upHandler, mouse_moveHandler, mouse_wheelHandler);
+		//}
+//
+		//if (Surface.get() != null) {
+			//Surface.get().notify(touch_startHandler, touch_endHandler, touch_moveHandler);
+		//}
 	}
 
 	function setup() {}
@@ -66,25 +81,41 @@ class SampleApplication {
 	}
 
 	function renderImpl( g4 : kha.graphics4.Graphics, g2 : kha.graphics2.Graphics ) {
+		trace('renderImpl enter');
+
+		trace('renderImpl g4 begin');
 		g4.begin();
 			renderG4(g4);
 		g4.end();
+		trace('renderImpl g4 end');
 
+		trace('renderImpl g2 begin');
 		g2.begin(false, null);
 			renderG2(g2);
 		g2.end();
+		trace('renderImpl g2 end');
+
+		trace('renderImpl exit');
 	}
 
 	function renderBB( fb : Framebuffer ) {
+		trace('renderBB enter');
 		renderImpl(bb.g4, bb.g2);
 
+		trace('renderBB fb.g2.begin()');
 		fb.g2.begin();
+			trace('renderBB scale');
 			Scaler.scale(bb, fb, System.screenRotation);
 		fb.g2.end();
+		trace('renderBB fb.g2.end()');
+
+		trace('renderBB exit');
 	}
 
 	function renderFB( fb : Framebuffer ) {
+		trace('renderFB enter');
 		renderImpl(fb.g4, fb.g2);
+		trace('renderFB exit');
 	}
 
 	function changeRenderMode() {
