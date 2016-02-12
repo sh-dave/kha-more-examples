@@ -1,12 +1,12 @@
-#stencil triangles
+#stencil triangles - [screenshots](https://github.com/sh-dave/kha-more-examples/wiki/stencil-triangles)
 - display 2 triangles with different stencil operations for the rgb one
-- [screenshots](https://github.com/sh-dave/kha-more-examples/wiki/stencil-triangles)
 
-#system options playground
+#system options playground - [screenshots](https://github.com/sh-dave/kha-more-examples/wiki/system-options-playground)
 - ideas for improvements to kha.System.init
 - prototype implementation for multiple window
 - requires: https://github.com/sh-dave/Kha - system-options-playground branch
 - requires: https://github.com/sh-dave/Kore - system-options-playground branch
+
 ```haxe
 kha.System.init('hello world', 800, 600, ...);
 ```
