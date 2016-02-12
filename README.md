@@ -4,19 +4,34 @@
 
 #system options playground
 - ideas for improvements to kha.System.init
+- prototype implementation for multiple window
+- requires: https://github.com/sh-dave/Kha - system-options-playground branch
+- requires: https://github.com/sh-dave/Kore - system-options-playground branch
 ```haxe
 kha.System.init('hello world', 800, 600, ...);
 ```
 ```haxe
-var options = new SystemOptions('system_settings_playground', width, height)
-    .setWindowMode(BorderlessWindow)
-    //.setWindowMode(Fullscreen)
-    .setWindowPosition(Fixed(128), Center)
-    .setTargetDisplay(Custom(1))
-    //.setTargetDisplay(Main)
-    .setWindowFlags(true, false, true)
-    .setFramebufferOptions(new RendererOptions(DepthStencilFormat.DepthAutoStencilAuto))
-    ;
+var mainWindowOptions = new WindowOptions('system_settings_playground | main', 683, 384)
+	.setMode(Windowed)
+	.setPosition(Center, Fixed(0))
+	.setTargetDisplay(Main)
+	;
 
-System.initEx(options, system_initializedHandler);
+var subWindowOptions = new WindowOptions('system_settings_playground | sub1', 683, 384)
+	.setMode(Windowed)
+	.setPosition(Center, Fixed(450))
+	.setTargetDisplay(Custom(1))
+	;
+
+var buttonWindowOptions = new WindowOptions('system_settings_playground | buttons', 683, 192)
+	.setMode(Windowed)
+	.setPosition(Center, Fixed(900))
+	.setTargetDisplay(Custom(1))
+	;
+
+System.initEx(
+	[mainWindowOptions, subWindowOptions, buttonWindowOptions],
+	window_initializedHandler,
+	system_initializedHandler
+);
 ```
