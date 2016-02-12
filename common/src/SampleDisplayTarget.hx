@@ -15,6 +15,7 @@ import kha.math.FastVector3;
 import kha.Scaler;
 import kha.System;
 import kha.Window;
+import kha.WindowOptions.RendererOptions;
 
 enum RenderMode {
 	Backbuffer;
@@ -36,12 +37,15 @@ class SampleDisplayTarget {
 
 	var windowId : Int;
 
-	public function new( windowId : Int ) {
+	public function new( windowId : Int/*, windowOptions : WindowOptions*/ ) {
 		this.windowId = windowId;
+
 		//bb = Image.createRenderTarget(
 			//System.windowWidth(windowId),
 			//System.windowHeight(windowId),
-			//window.textureFormat, window.depthStencilFormat);
+			//System.windowTextureFormat(windowId),
+			//System.depthStencilFormat(windowId)
+		//);
 
 		bb = Image.createRenderTarget(
 			1366,
@@ -50,12 +54,10 @@ class SampleDisplayTarget {
 			DepthStencilFormat.DepthAutoStencilAuto
 		);
 
-		assets_loadedHandler();
+		//assets_loadedHandler();
 	}
 
-	function assets_loadedHandler() {
-		setup();
-
+	public function setup() {
 		System.notifyOnRender(windowId, render);
 
 		//if (Keyboard.get() != null) {
@@ -70,8 +72,6 @@ class SampleDisplayTarget {
 			//Surface.get().notify(touch_startHandler, touch_endHandler, touch_moveHandler);
 		//}
 	}
-
-	function setup() {}
 
 	function render( fb : Framebuffer ) {
 		switch (renderMode) {
