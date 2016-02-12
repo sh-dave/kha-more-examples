@@ -31,7 +31,7 @@ class MainDisplay extends SampleDisplayTarget {
 		g.drawString('i\'m the main display', 8, 8);
 
 		g.color = Color.White;
-		g.drawRect(100, 100, 512, 512, 10);
+		g.drawRect(64, 64, 683 - 128, 384 - 128, 10);
 	}
 }
 
@@ -53,11 +53,11 @@ class SubDisplay extends SampleDisplayTarget {
 
 		g.font = font;
 		g.fontSize = 16;
-		g.color = Color.White;
+		g.color = Color.Black;
 		g.drawString('i\'m the sub display', 8, 8);
 
 		g.color = Color.White;
-		g.drawRect(100, 100, 512, 512, 10);
+		g.drawRect(64, 64, 683 - 128, 384 - 128, 10);
 	}
 }
 
@@ -83,7 +83,7 @@ class ButtonDisplay extends SampleDisplayTarget {
 		g.drawString('i\'m the button display', 8, 8);
 
 		g.color = Color.White;
-		g.drawRect(100, 100, 512, 512, 10);
+		g.drawRect(64, 64, 683 - 128, 192 - 128, 10);
 	}
 }
 
@@ -91,46 +91,52 @@ class Main {
 	public static function main() {
 		trace('main');
 
-		Assets.loadEverything(assets_loadedHandler);
+		//Assets.loadEverything(setup_singleWindow);
+		Assets.loadEverything(setup_multipleWindows);
 	}
 
-	static function assets_loadedHandler() {
-		var mainWindowOptions = new WindowOptions('system_settings_playground | main', 683, 384)
+	static function setup_singleWindow() {
+		System.init('single window', 800, 600, function() {
+			m = new MainDisplay(0);
+		});
+	}
+
+	static function setup_multipleWindows() {
+		var mainWindowOptions = new WindowOptions('main', 683, 384)
 			.setMode(Windowed)
 			.setPosition(Center, Fixed(0))
 			.setTargetDisplay(Main)
 			;
 
-		var subWindowOptions = new WindowOptions('system_settings_playground | sub1', 683, 384)
+		var subWindowOptions = new WindowOptions('sub1', 683, 384)
 			.setMode(Windowed)
 			.setPosition(Center, Fixed(450)) // TODO (DK) make relative to targetDisplay, not TargetDisplay.Main
 			.setTargetDisplay(Custom(1))
 			;
 
-		var buttonWindowOptions = new WindowOptions('system_settings_playground | buttons', 683, 192)
+		var buttonWindowOptions = new WindowOptions('buttons', 683, 192)
 			.setMode(Windowed)
 			.setPosition(Center, Fixed(900)) // TODO (DK) make relative to targetDisplay, not TargetDisplay.Main
 			.setTargetDisplay(Custom(1))
 			;
 
 		System.initEx(
+			'system settings playground',
 			[mainWindowOptions, subWindowOptions, buttonWindowOptions],
-			window_initializedHandler,
+			function window_initializedHandler( id : Int ) {
+				// TODO (DK) crappy logic for now, use diffrent callbacks for each window?
+				trace('window_initializedHandler');
+
+				if (m == null) {
+					m = new MainDisplay(id);
+				} else if (s == null) {
+					s = new SubDisplay(id);
+				} else {
+					b = new ButtonDisplay(id);
+				}
+			},
 			system_initializedHandler
 		);
-	}
-
-	// TODO (DK) crappy logic for now, use diffrent callbacks for each window?
-	static function window_initializedHandler( id : Int ) {
-		trace('window_initializedHandler');
-
-		if (m == null) {
-			m = new MainDisplay(id);
-		} else if (s == null) {
-			s = new SubDisplay(id);
-		} else {
-			b = new ButtonDisplay(id);
-		}
 	}
 
 	static function system_initializedHandler() {
