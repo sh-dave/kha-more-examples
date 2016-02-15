@@ -14,7 +14,7 @@ import kha.math.FastMatrix4;
 import kha.math.FastVector3;
 import kha.Scaler;
 import kha.System;
-import kha.Window;
+//import kha.Window;
 import kha.WindowOptions.RendererOptions;
 
 enum RenderMode {
