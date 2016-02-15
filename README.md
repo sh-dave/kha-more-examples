@@ -23,6 +23,10 @@ var mainWindowOptions = new WindowOptions('system_settings_playground | main', 6
 	.setMode(Windowed)
 	.setPosition(Center, Fixed(0))
 	.setTargetDisplay(Main)
+	.setWindowedFlag(Resizable)
+	.setWindowedFlag(Maximizable)
+	.setWindowedFlag(Minimizable)
+	.setRendererOptions(new RendererOptions(DepthStencilFormat.DepthAutoStencilAuto))
 	;
 
 var subWindowOptions = new WindowOptions('system_settings_playground | sub1', 683, 384)
@@ -43,6 +47,12 @@ System.initEx(
 	system_initializedHandler
 );
 ```
+### todos
+- [ ] setTargetDisplay()
+- [ ] setPosition() relative (to target display)
+- [ ] setWindowedFlags()
+- [ ] renderer: textureFormat flag
+- [ ] renderer: width/height needed?
 
 ### os progress
 - [ ] windows - wip
