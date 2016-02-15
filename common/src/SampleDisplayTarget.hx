@@ -14,7 +14,6 @@ import kha.math.FastMatrix4;
 import kha.math.FastVector3;
 import kha.Scaler;
 import kha.System;
-import kha.Window;
 import kha.WindowOptions.RendererOptions;
 
 enum RenderMode {
@@ -39,7 +38,9 @@ class SampleDisplayTarget {
 
 	public function new( windowId : Int/*, windowOptions : WindowOptions*/ ) {
 		this.windowId = windowId;
+	}
 
+	public function setup() {
 		//bb = Image.createRenderTarget(
 			//System.windowWidth(windowId),
 			//System.windowHeight(windowId),
@@ -54,10 +55,6 @@ class SampleDisplayTarget {
 			DepthStencilFormat.DepthAutoStencilAuto
 		);
 
-		//assets_loadedHandler();
-	}
-
-	public function setup() {
 		System.notifyOnRender(windowId, render);
 
 		//if (Keyboard.get() != null) {
