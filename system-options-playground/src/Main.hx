@@ -113,19 +113,19 @@ class Main {
 	static function setup_multipleWindows() {
 		var mainWindowOptions = new WindowOptions('main', 683, 384)
 			.setMode(Windowed)
-			.setPosition(Fixed(1920 - 800), Fixed(0))
+			.setPosition(Fixed(128), Fixed(128))
 			.setTargetDisplay(Main)
 			;
 
 		var subWindowOptions = new WindowOptions('sub1', 683, 384)
 			.setMode(Windowed)
-			.setPosition(Fixed(0), Fixed(450)) // TODO (DK) make relative to targetDisplay, not TargetDisplay.Main
-			.setTargetDisplay(Custom(1))
+			.setPosition(Fixed(128), Fixed(128)) // TODO (DK) make relative to targetDisplay, not TargetDisplay.Main
+			.setTargetDisplay(Custom(2))
 			;
 
 		var buttonWindowOptions = new WindowOptions('buttons', 683, 192)
 			.setMode(Windowed)
-			.setPosition(Center, Fixed(900)) // TODO (DK) make relative to targetDisplay, not TargetDisplay.Main
+			.setPosition(Center, Fixed(128)) // TODO (DK) make relative to targetDisplay, not TargetDisplay.Main
 			.setTargetDisplay(Custom(1))
 			;
 
