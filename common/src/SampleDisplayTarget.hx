@@ -14,6 +14,7 @@ import kha.math.FastMatrix4;
 import kha.math.FastVector3;
 import kha.Scaler;
 import kha.System;
+import kha.WindowOptions;
 import kha.WindowOptions.RendererOptions;
 
 enum RenderMode {
@@ -35,24 +36,19 @@ class SampleDisplayTarget {
 	var renderMode = Framebuffer;
 
 	var windowId : Int;
+	var windowOptions : WindowOptions;
 
-	public function new( windowId : Int/*, windowOptions : WindowOptions*/ ) {
+	public function new( windowId : Int, windowOptions : WindowOptions ) {
 		this.windowId = windowId;
+		this.windowOptions = windowOptions;
 	}
 
 	public function setup() {
-		//bb = Image.createRenderTarget(
-			//System.windowWidth(windowId),
-			//System.windowHeight(windowId),
-			//System.windowTextureFormat(windowId),
-			//System.depthStencilFormat(windowId)
-		//);
-
 		bb = Image.createRenderTarget(
-			1366,
-			768,
-			null,
-			DepthStencilFormat.DepthAutoStencilAuto
+			windowOptions.width,
+			windowOptions.height,
+			windowOptions.rendererOptions.textureFormat,
+			windowOptions.rendererOptions.depthStencilFormat
 		);
 
 		System.notifyOnRender(windowId, render);

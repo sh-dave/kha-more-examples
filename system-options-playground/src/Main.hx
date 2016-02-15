@@ -101,8 +101,10 @@ class Main {
 	}
 
 	static function setup_singleWindow() {
-		System.init('single window', 800, 600, function() {
-			m = new MainDisplay(0);
+		var options = new WindowOptions('single window', 683, 384);
+
+		System.init('single window', options.width, options.height, function() {
+			m = new MainDisplay(0, options);
 
 			Assets.loadEverything(function() {
 				m.setup();
@@ -137,11 +139,11 @@ class Main {
 				trace('window_initializedHandler');
 
 				if (m == null) {
-					m = new MainDisplay(id);// , mainWindowOptions.rendererOptions);
+					m = new MainDisplay(id, mainWindowOptions);// , mainWindowOptions.rendererOptions);
 				} else if (s == null) {
-					s = new SubDisplay(id);// , subWindowOptions.rendererOptions);
+					s = new SubDisplay(id, subWindowOptions);// , subWindowOptions.rendererOptions);
 				} else {
-					b = new ButtonDisplay(id);// , buttonWindowOptions.rendererOptions);
+					b = new ButtonDisplay(id, buttonWindowOptions);// , buttonWindowOptions.rendererOptions);
 				}
 			},
 			function system_initializedHandler() {
