@@ -7,7 +7,7 @@ import kha.Image;
 import kha.Key;
 import kha.System;
 import kha.Video;
-import kha.Window;
+//import kha.Window;
 import kha.WindowOptions;
 
 class BasicDisplay extends SampleDisplayTarget {
