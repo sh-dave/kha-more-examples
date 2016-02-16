@@ -7,7 +7,6 @@ import kha.Image;
 import kha.Key;
 import kha.System;
 import kha.Video;
-//import kha.Window;
 import kha.WindowOptions;
 
 class BasicDisplay extends SampleDisplayTarget {
@@ -121,32 +120,32 @@ class Main {
 
 		var subWindowOptions = new WindowOptions('sub1', 683, 384)
 			.setMode(Windowed)
-			.setPosition(Fixed(128), Fixed(128)) // TODO (DK) make relative to targetDisplay, not TargetDisplay.Main
+			.setPosition(Fixed(128), Fixed(128))
 			.setTargetDisplay(Custom(2))
 			;
 
 		var buttonWindowOptions = new WindowOptions('buttons', 683, 192)
 			.setMode(Windowed)
-			.setPosition(Center, Fixed(128)) // TODO (DK) make relative to targetDisplay, not TargetDisplay.Main
+			.setPosition(Center, Fixed(768))
 			.setTargetDisplay(Custom(1))
 			;
 
 		System.initEx(
 			'system settings playground',
 			[mainWindowOptions, subWindowOptions, buttonWindowOptions],
-			function window_initializedHandler( id : Int ) {
+			function( id : Int ) {
 				// TODO (DK) crappy logic for now, use diffrent callbacks for each window?
 				trace('window_initializedHandler');
 
 				if (m == null) {
-					m = new MainDisplay(id, mainWindowOptions);// , mainWindowOptions.rendererOptions);
+					m = new MainDisplay(id, mainWindowOptions);
 				} else if (s == null) {
-					s = new SubDisplay(id, subWindowOptions);// , subWindowOptions.rendererOptions);
+					s = new SubDisplay(id, subWindowOptions);
 				} else {
-					b = new ButtonDisplay(id, buttonWindowOptions);// , buttonWindowOptions.rendererOptions);
+					b = new ButtonDisplay(id, buttonWindowOptions);
 				}
 			},
-			function system_initializedHandler() {
+			function() {
 				trace('system_initializedHandler');
 
 				Assets.loadEverything(function() {
