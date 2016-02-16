@@ -1,0 +1,3 @@
+[submodule "system-options-playground/Kha"]
+	path = system-options-playground/Kha
+	url = ../Kha.git
