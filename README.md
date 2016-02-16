@@ -47,18 +47,21 @@ System.initEx(
 	system_initializedHandler
 );
 ```
-### todos
-- [ ] setTargetDisplay()
-- [ ] setPosition() relative (to target display)
-- [ ] setWindowedFlags()
-- [ ] renderer: textureFormat flag
-- [ ] renderer: width/height needed?
+### progress
+- [x] win - basic implementation of multiple windows
+- [x] win - setTargetDisplay
+- [x] win - setPosition
+- [ ] win - setWindowedFlag
+- [ ] win - mouse handling
+- [ ] win - keyboard handling
+- [ ] win - textureFormat flag for rendererOptions
+- [ ] win - ...?
 
-### os progress
-- [ ] windows - wip
-- [ ] linux - wip
-- others not planned
-
-#### graphics progress
-- [ ] opengl2 - wip
-- others not planned
+- [x] *nix - basic implementation of multiple windows
+- [x] *nix - setTargetDisplay | wip
+- [x] *nix - setPosition
+- [ ] *nix - setWindowedFlag
+- [ ] *nix - mouse handling
+- [ ] *nix - keyboard handling
+- [ ] *nix - textureFormat flag for rendererOptions
+- [ ] *nix - ...?
