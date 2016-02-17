@@ -7,3 +7,4 @@ node Kha/make --target windows --visualstudio vs2012 --to build/vs2012-d3d11 --g
 node Kha/make --target windows --visualstudio vs2012 --to build/vs2012-d3d12 --graphics direct3d12
 node Kha/make --target android-native --to build/android-native
 node Kha/make --target android --to build/android
+node Kha/make --target unity --to build/unity
