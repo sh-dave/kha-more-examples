@@ -102,7 +102,7 @@ class Main {
 	static function setup_singleWindow() {
 		var options = new WindowOptions('single window', 683, 384);
 
-		System.init('single window', options.width, options.height, function() {
+		System.init({title : options.title, width : options.width, height : options.height}, function() {
 			m = new MainDisplay(0, options);
 
 			Assets.loadEverything(function() {
