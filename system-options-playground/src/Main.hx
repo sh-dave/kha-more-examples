@@ -12,7 +12,8 @@ import kha.WindowOptions;
 class BasicDisplay extends SampleDisplayTarget {
 	var font : Font;
 	var char : Image;
-	var startX : Float;
+	var charX : Float;
+	var charY : Float;
 
 	override function setup() {
 		super.setup();
@@ -20,18 +21,24 @@ class BasicDisplay extends SampleDisplayTarget {
 		var a = Assets;
 		font = a.fonts.LiberationSans_Regular;
 		char = Assets.images.character;
-		startX = Math.random() * 512;
+		charX = Math.random() * windowOptions.width - char.width;
+		charY = Math.random() * windowOptions.height - char.height;
+	}
+
+	override function mouse_moveHandler( x : Int, y : Int, mx : Int, my : Int ) {
+		charX = x;
+		charY = y;
 	}
 }
 
 class MainDisplay extends BasicDisplay {
 	override function renderG4( g : kha.graphics4.Graphics ) {
 		g.clear(Color.fromBytes(0xff, 0x00, 0x00, 0xff), 0.0, 0);
-		trace('MainDisplay renderG4');
+		//trace('MainDisplay renderG4');
 	}
 
 	override function renderG2( g : kha.graphics2.Graphics ) {
-		trace('MainDisplay renderG2');
+		//trace('MainDisplay renderG2');
 
 		g.font = font;
 		g.fontSize = 16;
@@ -42,18 +49,23 @@ class MainDisplay extends BasicDisplay {
 		g.drawRect(64, 64, 683 - 128, 384 - 128, 10);
 
 		g.color = Color.White;
-		g.drawImage(char, startX, 64);
+		g.drawImage(char, charX, charY);
+	}
+
+	override function mouse_moveHandler( x : Int, y : Int, mx : Int, my : Int ) {
+		super.mouse_moveHandler(x, y, mx, my);
+		trace('MainDisplay.mouse_moveHandler ${x} ${y} ${mx} ${my}');
 	}
 }
 
 class SubDisplay extends BasicDisplay {
 	override function renderG4( g : kha.graphics4.Graphics ) {
 		g.clear(Color.fromBytes(0x00, 0xff, 0x00, 0xff), 0.0, 0);
-		trace('SubDisplay renderG4');
+		//trace('SubDisplay renderG4');
 	}
 
 	override function renderG2( g : kha.graphics2.Graphics ) {
-		trace('SubDisplay renderG2');
+		//trace('SubDisplay renderG2');
 
 		g.font = font;
 		g.fontSize = 16;
@@ -64,18 +76,23 @@ class SubDisplay extends BasicDisplay {
 		g.drawRect(64, 64, 683 - 128, 384 - 128, 10);
 
 		g.color = Color.White;
-		g.drawImage(char, startX, 64);
+		g.drawImage(char, charX, charY);
+	}
+
+	override function mouse_moveHandler( x : Int, y : Int, mx : Int, my : Int ) {
+		super.mouse_moveHandler(x, y, mx, my);
+		trace('SubDisplay.mouse_moveHandler ${x} ${y} ${mx} ${my}');
 	}
 }
 
 class ButtonDisplay extends BasicDisplay {
 	override function renderG4( g : kha.graphics4.Graphics ) {
 		g.clear(Color.fromBytes(0x00, 0x00, 0xff, 0xff), 0.0, 0);
-		trace('ButtonDisplay renderG4');
+		//trace('ButtonDisplay renderG4');
 	}
 
 	override function renderG2( g : kha.graphics2.Graphics ) {
-		trace('ButtonDisplay renderG2');
+		//trace('ButtonDisplay renderG2');
 
 		g.font = font;
 		g.fontSize = 16;
@@ -86,7 +103,12 @@ class ButtonDisplay extends BasicDisplay {
 		g.drawRect(64, 64, 683 - 128, 192 - 128, 10);
 
 		g.color = Color.White;
-		g.drawImage(char, startX, 64);
+		g.drawImage(char, charX, charY);
+	}
+
+	override function mouse_moveHandler( x : Int, y : Int, mx : Int, my : Int ) {
+		super.mouse_moveHandler(x, y, mx, my);
+		trace('ButtonDisplay.mouse_moveHandler ${x} ${y} ${mx} ${my}');
 	}
 }
 

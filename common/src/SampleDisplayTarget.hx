@@ -57,9 +57,9 @@ class SampleDisplayTarget {
 			//Keyboard.get().notify(keyboard_downHandler, keyboard_upHandler);
 		//}
 //
-		//if (Mouse.get() != null) {
-			//Mouse.get().notify(mouse_downHandler, mouse_upHandler, mouse_moveHandler, mouse_wheelHandler);
-		//}
+		if (Mouse.get() != null) {
+			Mouse.get().notifyWindowed(windowId, mouse_downHandler, mouse_upHandler, mouse_moveHandler, mouse_wheelHandler);
+		}
 //
 		//if (Surface.get() != null) {
 			//Surface.get().notify(touch_startHandler, touch_endHandler, touch_moveHandler);
@@ -74,41 +74,41 @@ class SampleDisplayTarget {
 	}
 
 	function renderImpl( g4 : kha.graphics4.Graphics, g2 : kha.graphics2.Graphics ) {
-		trace('renderImpl enter');
+		//trace('renderImpl enter');
 
-		trace('renderImpl g4 begin');
+		//trace('renderImpl g4 begin');
 		g4.begin();
 			renderG4(g4);
 		g4.end();
-		trace('renderImpl g4 end');
+		//trace('renderImpl g4 end');
 
-		trace('renderImpl g2 begin');
+		//trace('renderImpl g2 begin');
 		g2.begin(false, null);
 			renderG2(g2);
 		g2.end();
-		trace('renderImpl g2 end');
+		//trace('renderImpl g2 end');
 
-		trace('renderImpl exit');
+		//trace('renderImpl exit');
 	}
 
 	function renderBB( fb : Framebuffer ) {
-		trace('renderBB enter');
+		//trace('renderBB enter');
 		renderImpl(bb.g4, bb.g2);
 
-		trace('renderBB fb.g2.begin()');
+		//trace('renderBB fb.g2.begin()');
 		fb.g2.begin();
-			trace('renderBB scale');
+			//trace('renderBB scale');
 			Scaler.scale(bb, fb, System.screenRotation);
 		fb.g2.end();
-		trace('renderBB fb.g2.end()');
+		//trace('renderBB fb.g2.end()');
 
-		trace('renderBB exit');
+		//trace('renderBB exit');
 	}
 
 	function renderFB( fb : Framebuffer ) {
-		trace('renderFB enter');
+		//trace('renderFB enter');
 		renderImpl(fb.g4, fb.g2);
-		trace('renderFB exit');
+		//trace('renderFB exit');
 	}
 
 	function changeRenderMode() {
