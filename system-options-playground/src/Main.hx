@@ -117,8 +117,8 @@ class Main {
 	public static function main() {
 		trace('main');
 
-		//setup_singleWindow();
-		setup_multipleWindows();
+		setup_singleWindow();
+		//setup_multipleWindows();
 	}
 
 	static function setup_singleWindow() {
