@@ -135,7 +135,7 @@ class Main {
 
 	static function setup_multipleWindows() {
 		var mainWindowOptions = { title : ' | main', width : 683, height : 384, mode : Window, x : Fixed(128), y : Fixed(128) };
-		var subWindowOptions = { title : ' | sub1', width : 683, height : 384, mode : BorderlessWindow, x : Fixed(128), y : Fixed(128), targetDisplay : ById(2) };
+		var subWindowOptions = { title : ' | sub1', width : 1280, height : 1024, mode : BorderlessWindow, x : Fixed(0), y : Fixed(0), targetDisplay : ById(2) };
 		var buttonWindowOptions = { title : ' | buttons', width : 683, height : 192, y : Fixed(768), targetDisplay : ById(1) };
 
 		System.initEx(

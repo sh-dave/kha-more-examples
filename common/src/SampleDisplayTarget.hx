@@ -49,7 +49,9 @@ class SampleDisplayTarget {
 			windowOptions.width,
 			windowOptions.height,
 			windowOptions.rendererOptions != null ? windowOptions.rendererOptions.textureFormat : TextureFormat.RGBA32,
-			windowOptions.rendererOptions != null ? windowOptions.rendererOptions.depthStencilFormat : DepthStencilFormat.DepthAutoStencilAuto
+			windowOptions.rendererOptions != null ? windowOptions.rendererOptions.depthStencilFormat : DepthStencilFormat.DepthAutoStencilAuto,
+			0, // TODO (DK) samplesPerPixel
+			windowId
 		);
 
 		System.notifyOnRender(windowId, render);
@@ -84,7 +86,7 @@ class SampleDisplayTarget {
 		//trace('renderImpl g4 end');
 
 		//trace('renderImpl g2 begin');
-		g2.begin(false, null);
+		g2.begin(false);
 			renderG2(g2);
 		g2.end();
 		//trace('renderImpl g2 end');
