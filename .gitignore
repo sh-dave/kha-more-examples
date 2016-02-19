@@ -1,2 +1,3 @@
 build
 /stencil-triangles/korefile.js
+*.DS_Store
