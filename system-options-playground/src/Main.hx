@@ -117,12 +117,12 @@ class Main {
 	public static function main() {
 		trace('main');
 
-		setup_singleWindow();
-		//setup_multipleWindows();
+		//setup_singleWindow();
+		setup_multipleWindows();
 	}
 
 	static function setup_singleWindow() {
-		var options = new WindowOptions('single window', 683, 384);
+		var options = { title : 'single window', width : 683, height : 384 };
 
 		System.init({title : options.title, width : options.width, height : options.height}, function() {
 			m = new MainDisplay(0, options);
@@ -134,23 +134,9 @@ class Main {
 	}
 
 	static function setup_multipleWindows() {
-		var mainWindowOptions = new WindowOptions('main', 683, 384)
-			.setMode(Windowed)
-			.setPosition(Fixed(128), Fixed(128))
-			.setTargetDisplay(Main)
-			;
-
-		var subWindowOptions = new WindowOptions('sub1', 683, 384)
-			.setMode(Windowed)
-			.setPosition(Fixed(128), Fixed(128))
-			.setTargetDisplay(Custom(2))
-			;
-
-		var buttonWindowOptions = new WindowOptions('buttons', 683, 192)
-			.setMode(Windowed)
-			.setPosition(Center, Fixed(768))
-			.setTargetDisplay(Custom(1))
-			;
+		var mainWindowOptions = { title : ' | main', width : 683, height : 384, mode : Window, x : Fixed(128), y : Fixed(128) };
+		var subWindowOptions = { title : ' | sub1', width : 683, height : 384, mode : BorderlessWindow, x : Fixed(128), y : Fixed(128), targetDisplay : ById(2) };
+		var buttonWindowOptions = { title : ' | buttons', width : 683, height : 192, y : Fixed(768), targetDisplay : ById(1) };
 
 		System.initEx(
 			'system settings playground',

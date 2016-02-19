@@ -5,6 +5,7 @@ import kha.DepthStencilFormat;
 import kha.Framebuffer;
 import kha.graphics4.ConstantLocation;
 import kha.graphics4.PipelineState;
+import kha.graphics4.TextureFormat;
 import kha.Image;
 import kha.input.Keyboard;
 import kha.input.Mouse;
@@ -32,8 +33,8 @@ class SampleDisplayTarget {
 	var projection = FastMatrix4.perspectiveProjection(45.0, 4.0 / 3.0, 0.1, 100.0);
 
 	var bb : Image;
-	var renderMode = Backbuffer;
-	//var renderMode = Framebuffer;
+	//var renderMode = Backbuffer;
+	var renderMode = Framebuffer;
 
 	var windowId : Int;
 	var windowOptions : WindowOptions;
@@ -47,8 +48,8 @@ class SampleDisplayTarget {
 		bb = Image.createRenderTarget(
 			windowOptions.width,
 			windowOptions.height,
-			windowOptions.rendererOptions.textureFormat,
-			windowOptions.rendererOptions.depthStencilFormat
+			windowOptions.rendererOptions != null ? windowOptions.rendererOptions.textureFormat : TextureFormat.RGBA32,
+			windowOptions.rendererOptions != null ? windowOptions.rendererOptions.depthStencilFormat : DepthStencilFormat.DepthAutoStencilAuto
 		);
 
 		System.notifyOnRender(windowId, render);
