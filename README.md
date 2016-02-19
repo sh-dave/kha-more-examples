@@ -2,10 +2,10 @@
 - display 2 triangles with different stencil operations for the rgb one
 
 #system options playground - [screenshots](https://github.com/sh-dave/kha-more-examples/wiki/system-options-playground)
-- ideas for improvements to kha.System.init
 - prototype implementation for multiple window
 - requires: https://github.com/sh-dave/Kha - system-options-playground branch
 - requires: https://github.com/sh-dave/Kore - system-options-playground branch
+- requires: https://github.com/sh-dave/koremake - system-options-playground branch
 
 ### old interface is still supported (single window ...)
 ```haxe
@@ -13,46 +13,30 @@ kha.System.init('hello world', 800, 600, ...);
 ```
 
 ### new interface
-- window mode (Windowed, BorderlessWindow, Fullscreen) - 
-- target display (Main, Custom(N)) - monitor selection
+- window mode (Window, BorderlessWindow, Fullscreen) - 
+- target display (Primary, ById(N)) - monitor selection
 - window position (Center, Fixed(N)) - positioning the window
 - ... more to come
 
 ```haxe
-var mainWindowOptions = new WindowOptions('system_settings_playground | main', 683, 384)
-	.setMode(Windowed)
-	.setPosition(Center, Fixed(0))
-	.setTargetDisplay(Main)
-	.setWindowedFlag(Resizable)
-	.setWindowedFlag(Maximizable)
-	.setWindowedFlag(Minimizable)
-	.setRendererOptions(new RendererOptions(DepthStencilFormat.DepthAutoStencilAuto))
-	;
-
-var subWindowOptions = new WindowOptions('system_settings_playground | sub1', 683, 384)
-	.setMode(Windowed)
-	.setPosition(Center, Fixed(450))
-	.setTargetDisplay(Custom(1))
-	;
-
-var buttonWindowOptions = new WindowOptions('system_settings_playground | buttons', 683, 192)
-	.setMode(Windowed)
-	.setPosition(Center, Fixed(900))
-	.setTargetDisplay(Custom(1))
-	;
+var mainWindowOptions = { title : ' | main', width : 683, height : 384, mode : Window, x : Fixed(128), y : Fixed(128) };
+var subWindowOptions = { title : ' | sub1', width : 683, height : 384, mode : BorderlessWindow, x : Fixed(128), y : Fixed(128), targetDisplay : ById(2) };
+var buttonWindowOptions = { title : ' | buttons', width : 683, height : 192, y : Fixed(768), targetDisplay : ById(1) };
 
 System.initEx(
+	'system settings playground',
 	[mainWindowOptions, subWindowOptions, buttonWindowOptions],
 	window_initializedHandler,
-	system_initializedHandler
+	system_initializeHandler
 );
+
 ```
 ### progress
 - [x] win - basic implementation of multiple windows
 - [x] win - setTargetDisplay
 - [x] win - setPosition
 - [ ] win - setWindowedFlag
-- [ ] win - mouse handling
+- [x] win - mouse handling
 - [ ] win - keyboard handling
 - [ ] win - textureFormat flag for rendererOptions
 - [ ] win - ...?
@@ -61,7 +45,7 @@ System.initEx(
 - [x] *nix - setTargetDisplay | wip
 - [x] *nix - setPosition
 - [ ] *nix - setWindowedFlag
-- [ ] *nix - mouse handling
+- [x] *nix - mouse handling
 - [ ] *nix - keyboard handling
 - [ ] *nix - textureFormat flag for rendererOptions
 - [ ] *nix - ...?
