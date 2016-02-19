@@ -184,7 +184,7 @@ class Main {
 	static inline var height = 512;
 
 	public static function main() {
-		System.init('stencil_triangles', width, height, system_initializedHandler);
+		System.init({ title : 'stencil_triangles', width : width, height : height}, system_initializedHandler);
 	}
 
 	static function system_initializedHandler() {

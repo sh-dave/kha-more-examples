@@ -41,7 +41,7 @@ class SampleApplication {
 	function assets_loadedHandler() {
 		setup();
 
-		System.notifyOnRender(0, render);
+		System.notifyOnRender(render);
 
 		if (Keyboard.get() != null) {
 			Keyboard.get().notify(keyboard_downHandler, keyboard_upHandler);
