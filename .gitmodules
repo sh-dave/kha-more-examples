@@ -1,3 +1,6 @@
 [submodule "system-options-playground/Kha"]
 	path = system-options-playground/Kha
 	url = ../Kha.git
+[submodule "stencil-triangles/Kha"]
+	path = stencil-triangles/Kha
+	url = https://github.com/KTXSoftware/Kha
