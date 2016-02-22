@@ -4,6 +4,7 @@ import kha.Assets;
 import kha.Color;
 import kha.Font;
 import kha.Image;
+import kha.input.Keyboard;
 import kha.Key;
 import kha.System;
 import kha.Video;
@@ -43,7 +44,8 @@ class MainDisplay extends BasicDisplay {
 		g.font = font;
 		g.fontSize = 16;
 		g.color = Color.White;
-		g.drawString('i\'m the main display', 8, 8);
+
+		g.drawString('i\'m the main display (${renderMode})', 8, 8);
 
 		g.color = Color.White;
 		g.drawRect(64, 64, 683 - 128, 384 - 128, 10);
@@ -70,7 +72,7 @@ class SubDisplay extends BasicDisplay {
 		g.font = font;
 		g.fontSize = 16;
 		g.color = Color.Black;
-		g.drawString('i\'m the sub display', 8, 8);
+		g.drawString('i\'m the sub display (${renderMode})', 8, 8);
 
 		g.color = Color.White;
 		g.drawRect(64, 64, 683 - 128, 384 - 128, 10);
@@ -97,7 +99,7 @@ class ButtonDisplay extends BasicDisplay {
 		g.font = font;
 		g.fontSize = 16;
 		g.color = Color.White;
-		g.drawString('i\'m the button display', 8, 8);
+		g.drawString('i\'m the button display (${renderMode})', 8, 8);
 
 		g.color = Color.White;
 		g.drawRect(64, 64, 683 - 128, 192 - 128, 10);
@@ -170,6 +172,31 @@ class Main {
 					if (b != null) {
 						b.setup();
 					}
+
+                    if (Keyboard.get() != null) {
+                        Keyboard.get().notify(function( key : Key, id : String ) {}, function( key : Key, id : String ) {
+                            switch (key) {
+                                case CHAR: {
+                                    switch (id) {
+                                        case ' ': {
+                                            if (m != null) {
+                                                m.changeRenderMode();
+                                            }
+
+                                            if (s != null) {
+                                                s.changeRenderMode();
+                                            }
+
+                                            if (b != null) {
+                                                b.changeRenderMode();
+                                            }
+                                        }
+                                    }
+                                }
+								default: return;
+                            }
+                        });
+                    }
 				});
 			}
 		);

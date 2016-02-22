@@ -33,8 +33,8 @@ class SampleDisplayTarget {
 	var projection = FastMatrix4.perspectiveProjection(45.0, 4.0 / 3.0, 0.1, 100.0);
 
 	var bb : Image;
-	//var renderMode = Backbuffer;
-	var renderMode = Framebuffer;
+	var renderMode = Backbuffer;
+	//var renderMode = Framebuffer;
 
 	var windowId : Int;
 	var windowOptions : WindowOptions;
@@ -114,7 +114,7 @@ class SampleDisplayTarget {
 		//trace('renderFB exit');
 	}
 
-	function changeRenderMode() {
+	public function changeRenderMode() {
 		renderMode = renderMode == Framebuffer ? Backbuffer : Framebuffer;
 	}
 
