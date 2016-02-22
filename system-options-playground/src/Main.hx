@@ -121,8 +121,11 @@ class Main {
 		trace('main');
 
 		traceSystemStats();
+#if (sys_windows || sys_linux || sys_osx)
+		setup_multipleWindows();
+#else
 		setup_singleWindow();
-		//setup_multipleWindows();
+#end
 	}
 
 	static function traceSystemStats() {
