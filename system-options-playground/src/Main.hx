@@ -2,6 +2,7 @@ package ;
 
 import kha.Assets;
 import kha.Color;
+import kha.Display;
 import kha.Font;
 import kha.Image;
 import kha.input.Keyboard;
@@ -119,8 +120,17 @@ class Main {
 	public static function main() {
 		trace('main');
 
-		//setup_singleWindow();
-		setup_multipleWindows();
+		traceSystemStats();
+		setup_singleWindow();
+		//setup_multipleWindows();
+	}
+
+	static function traceSystemStats() {
+		for (i in 0 ... Display.count) {
+			var width = Display.width(i);
+			var height = Display.height(i);
+			trace('display ${i}/${Display.count}: ${width}x${height}');
+		}
 	}
 
 	static function setup_singleWindow() {
