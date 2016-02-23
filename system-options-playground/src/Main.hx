@@ -121,6 +121,10 @@ class Main {
 		trace('main');
 
 		traceSystemStats();
+
+		// TODO (DK)
+		//	-when using d3dx only the setup_singleWindow will work for now
+		//	-but there is no define i could check
 #if (sys_windows || sys_linux || sys_osx)
 		setup_multipleWindows();
 #else
@@ -144,8 +148,38 @@ class Main {
 
 			Assets.loadEverything(function() {
 				m.setup();
+
+				if (Keyboard.get() != null) {
+					Keyboard.get().notify(keyboard_downHandler, keyboard_upHandler);
+				}
 			});
 		});
+	}
+
+	static function keyboard_downHandler( key : Key, id : String ) {
+		switch (key) {
+			case CHAR: {
+				switch (id) {
+					case ' ': {
+						if (m != null) {
+							m.changeRenderMode();
+						}
+
+						if (s != null) {
+							s.changeRenderMode();
+						}
+
+						if (b != null) {
+							b.changeRenderMode();
+						}
+					}
+				}
+			}
+			default: return;
+		}
+	}
+
+	static function keyboard_upHandler( key : Key, id : String ) {
 	}
 
 	static function setup_multipleWindows() {
@@ -186,30 +220,9 @@ class Main {
 						b.setup();
 					}
 
-                    if (Keyboard.get() != null) {
-                        Keyboard.get().notify(function( key : Key, id : String ) {}, function( key : Key, id : String ) {
-                            switch (key) {
-                                case CHAR: {
-                                    switch (id) {
-                                        case ' ': {
-                                            if (m != null) {
-                                                m.changeRenderMode();
-                                            }
-
-                                            if (s != null) {
-                                                s.changeRenderMode();
-                                            }
-
-                                            if (b != null) {
-                                                b.changeRenderMode();
-                                            }
-                                        }
-                                    }
-                                }
-								default: return;
-                            }
-                        });
-                    }
+					if (Keyboard.get() != null) {
+						Keyboard.get().notify(keyboard_downHandler, keyboard_upHandler);
+					}
 				});
 			}
 		);
