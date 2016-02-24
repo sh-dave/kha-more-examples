@@ -30,11 +30,12 @@ class SampleApplication {
 	var projection = FastMatrix4.perspectiveProjection(45.0, 4.0 / 3.0, 0.1, 100.0);
 
 	var bb : Image;
-//	var renderMode = Backbuffer;
-	var renderMode = Framebuffer;
+	var renderMode = Backbuffer;
+	//var renderMode = Framebuffer;
+	public static var bbScale = 1.0;
 
 	public function new( bbWidth : Int, bbHeight : Int ) {
-		bb = Image.createRenderTarget(bbWidth, bbHeight, null, DepthStencilFormat.DepthAutoStencilAuto);
+		bb = Image.createRenderTarget(Std.int(bbWidth * bbScale), Std.int(bbHeight * bbScale), null, DepthStencilFormat.DepthAutoStencilAuto);
 		Assets.loadEverything(assets_loadedHandler);
 	}
 
