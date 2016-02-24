@@ -4,3 +4,6 @@
 [submodule "stencil-triangles/Kha"]
 	path = stencil-triangles/Kha
 	url = https://github.com/KTXSoftware/Kha
+[submodule "remote-asset-loading/Kha"]
+	path = remote-asset-loading/Kha
+	url = ../Kha
