@@ -3,12 +3,9 @@ package;
 import haxe.Http;
 import haxe.io.Bytes;
 import haxe.io.BytesInput;
-import haxe.macro.Format;
 import kha.Assets;
 import kha.Color;
-import kha.Framebuffer;
 import kha.Image;
-import kha.Scaler;
 import kha.System;
 
 using tink.CoreApi;
@@ -114,14 +111,14 @@ class RemoteAssetLoading extends SampleApplication {
 	override function setup() {
 		// TODO (DK) windows requires hxssl library for https stuff
 		//RemoteLoader.load('https://github.com/sh-dave/kha-more-examples/raw/gh-pages/stencil-triangles/images/always.png')
-		RemoteLoader.load('http://sudoestegames.com/play/ball.png')
+		//RemoteLoader.load('http://sudoestegames.com/play/ball.png')
 		//RemoteLoader.load('http://icons.iconarchive.com/icons/martin-berube/sport/128/Baseball-icon.png')
 
 		//LocalLoader.load('ball_png_blob') // broken
 		//LocalLoader.load('ball_2_png_blob') // broken
 		//LocalLoader.load('ball_3_png_blob') // broken
 		//LocalLoader.load('baseball_icon_png_blob') // ok
-		//LocalLoader.load('Glow_Ball_icon_120_png_blob') // ok with changes in ogl2/textureimpl
+		LocalLoader.load('Glow_Ball_icon_120_png_blob') // ok with changes in ogl2/textureimpl
 		//LocalLoader.load('gimp_ball_pot_png_blob') // ok
 			//.flatMap(ImageBuilder.convertPng)
 
@@ -155,7 +152,7 @@ class Main {
 	}
 
 	static function system_initializedHandler() {
-		SampleApplication.bbScale = 0.25;
+		//SampleApplication.bbScale = 0.25;
 		new RemoteAssetLoading(width, height);
 	}
 }
