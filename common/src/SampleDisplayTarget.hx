@@ -54,7 +54,7 @@ class SampleDisplayTarget {
 			windowId
 		);
 
-		System.notifyOnRender(windowId, render);
+		System.notifyOnRender(render, windowId);
 
 		//if (Keyboard.get() != null) {
 			//Keyboard.get().notify(keyboard_downHandler, keyboard_upHandler);

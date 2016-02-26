@@ -151,7 +151,7 @@ class StencilTrianglesExample extends SampleApplication {
 	}
 
 	override function mouse_downHandler( button : Int, x : Int, y : Int ) {
-		if (x < System.pixelWidth / 2) {
+		if (x < System.windowWidth() / 2) {
 			changeCompareMode();
 		} else {
 			changeRenderMode();

@@ -1,6 +1,6 @@
-node Kha/make --target android --to build/android
-node Kha/make --target android-native --to build/android-native
-::node Kha/make --target flash --to build/flash
+::node Kha/make --target android --to build/android
+::node Kha/make --target android-native --to build/android-native
+node Kha/make --target flash --to build/flash
 
 ::node Kha/make --target html5 --to build/html5
 ::node Kha/make --target windows --to build/vs2012-gl --visualstudio vs2012 --graphics opengl
